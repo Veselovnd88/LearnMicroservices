@@ -1,6 +1,8 @@
 CREATE
     EXTENSION IF NOT EXISTS "uuid-ossp";
 
+GO
+
 create table customer
 (
     id         UUID    NOT NULL DEFAULT gen_random_uuid(),

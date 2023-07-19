@@ -1,11 +1,18 @@
 version: "3.8"
 services:
-  database:
+  customerDB:
+    container_name: postgres
     image: "postgres:15.2"
-    restart: always
+    restart: unless-stopped
     env_file:
       - database.env
     ports:
       - "5437:5432"
+    networks:
+      - postgres
     volumes:
       - /var/docker-volumes/pg-ms-customer:/var/lib/postgresql/data/
+
+networks:
+  postgres:
+    driver: bridge
