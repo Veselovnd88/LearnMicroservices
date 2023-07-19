@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  database:
+    image: "postgres:15.2"
+    restart: always
+    env_file:
+      - database.env
+    ports:
+      - "5437:5432"
+    volumes:
+      - /var/docker-volumes/pg-ms-customer:/var/lib/postgresql/data/
