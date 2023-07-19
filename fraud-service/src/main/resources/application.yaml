@@ -4,3 +4,21 @@ server:
 spring:
   application:
     name: Fraud Service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5438/FraudDB
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: false
+        hbm2ddl:
+          auto: validate
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml

@@ -1,17 +1,30 @@
 version: "3.8"
 services:
-  customerDB:
-    container_name: postgres
+  postgres-customer:
+    container_name: postgres-customer
     image: "postgres:15.2"
     restart: unless-stopped
     env_file:
-      - database.env
+      - database-customer.env
     ports:
       - "5437:5432"
     networks:
       - postgres
     volumes:
-      - /var/docker-volumes/pg-ms-customer:/var/lib/postgresql/data/
+      - /var/docker-volumes/pg-ms-learn-customer:/var/lib/postgresql/data/
+
+  postgres-fraud:
+    container_name: postgres-fraud
+    image: "postgres:15.2"
+    restart: unless-stopped
+    env_file:
+      - database-fraud.env
+    ports:
+      - "5438:5432"
+    networks:
+      - postgres
+    volumes:
+      - /var/docker-volumes/pg-ms-learn-fraud:/var/lib/postgresql/data/
 
 networks:
   postgres:
