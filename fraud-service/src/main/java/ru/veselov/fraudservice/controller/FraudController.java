@@ -1,6 +1,7 @@
 package ru.veselov.fraudservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class FraudController {
 
     private final FraudCheckService fraudCheckService;
 
-    @PostMapping("/{customerId}")
+    @GetMapping("/{customerId}")
     public FraudCheckResponse isFraudster(@PathVariable("customerId") UUID customerId) {
         boolean fraudulentCustomer = fraudCheckService.isFraudulentCustomer(customerId);
         return new FraudCheckResponse(fraudulentCustomer);

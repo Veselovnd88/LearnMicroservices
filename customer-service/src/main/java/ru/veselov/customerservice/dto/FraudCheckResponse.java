@@ -1,4 +1,4 @@
-package ru.veselov.fraudservice.dto;
+package ru.veselov.customerservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
