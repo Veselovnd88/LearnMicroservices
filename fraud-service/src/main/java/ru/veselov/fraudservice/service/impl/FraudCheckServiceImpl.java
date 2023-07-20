@@ -8,6 +8,7 @@ import ru.veselov.fraudservice.repository.FraudCheckHistoryRepository;
 import ru.veselov.fraudservice.service.FraudCheckService;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class FraudCheckServiceImpl implements FraudCheckService {
     private final FraudCheckHistoryRepository fraudCheckHistoryRepository;
 
     @Override
-    public boolean isFraudulentCustomer(Integer customerId) {
+    public boolean isFraudulentCustomer(UUID customerId) {
         FraudCheckHistoryEntity fraudCheckHistory = FraudCheckHistoryEntity.builder()
                 .customerId(customerId)
                 .isFraudster(false)

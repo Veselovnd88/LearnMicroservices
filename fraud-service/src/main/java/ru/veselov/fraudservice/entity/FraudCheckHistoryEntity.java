@@ -29,7 +29,7 @@ public class FraudCheckHistoryEntity {
     private UUID id;
 
     @Column(name = "customer_id")
-    private Integer customerId;
+    private UUID customerId;
 
     @Column(name = "is_fraudster")
     private Boolean isFraudster;
