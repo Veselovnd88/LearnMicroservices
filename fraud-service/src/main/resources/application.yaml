@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Fraud Service
+    name: fraud
 
   datasource:
     url: jdbc:postgresql://localhost:5438/FraudDB
@@ -22,3 +22,10 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true

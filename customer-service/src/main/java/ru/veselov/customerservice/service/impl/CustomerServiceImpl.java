@@ -15,7 +15,7 @@ import ru.veselov.customerservice.service.CustomerService;
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
-    public static final String FRAUD_URL = "http://localhost:7075/api/v1/fraud-check/";
+    public static final String FRAUD_URL = "http://FRAUD/api/v1/fraud-check/";
 
     private final CustomerRepository customerRepository;
 

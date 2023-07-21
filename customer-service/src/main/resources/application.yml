@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Customer Service
+    name: customer
   datasource:
     url: jdbc:postgresql://localhost:5437/CustomerDB
     username: admin
@@ -21,3 +21,10 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
