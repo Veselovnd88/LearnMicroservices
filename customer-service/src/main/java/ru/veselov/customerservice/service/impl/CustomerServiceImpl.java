@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import ru.veselov.clientsservice.client.FraudClient;
+import ru.veselov.clientsservice.dto.FraudCheckResponse;
 import ru.veselov.customerservice.dto.CustomerRegistrationRequest;
-import ru.veselov.customerservice.dto.FraudCheckResponse;
 import ru.veselov.customerservice.entity.CustomerEntity;
 import ru.veselov.customerservice.repository.CustomerRepository;
 import ru.veselov.customerservice.service.CustomerService;
@@ -15,11 +16,11 @@ import ru.veselov.customerservice.service.CustomerService;
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
-    public static final String FRAUD_URL = "http://FRAUD/api/v1/fraud-check/";
-
     private final CustomerRepository customerRepository;
 
     private final RestTemplate restTemplate;
+
+    private final FraudClient fraudClient;
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -30,8 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .build();
         customerRepository.saveAndFlush(customerEntity);
         log.info("Customer saved [{}]", customerEntity.getId());
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(FRAUD_URL + "{customerId}",
-                FraudCheckResponse.class, customerEntity.getId().toString());
+
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customerEntity.getId());
         if (fraudCheckResponse.isFraudster()) {
             log.error("Customer is fraudster");
             throw new IllegalStateException("Customer is fraudster");

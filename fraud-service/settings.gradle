@@ -1,1 +1,5 @@
 rootProject.name = 'fraud-service'
+
+include ':clients-service'
+
+project(':clients-service').projectDir = new File(settingsDir,"../clients-service")

@@ -1,4 +1,4 @@
-package ru.veselov.customerservice.dto;
+package ru.veselov.clientsservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
