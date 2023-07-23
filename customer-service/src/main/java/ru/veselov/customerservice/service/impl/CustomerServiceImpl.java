@@ -3,9 +3,10 @@ package ru.veselov.customerservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import ru.veselov.clientsservice.fraud.FraudCheckResponse;
 import ru.veselov.clientsservice.fraud.FraudClient;
+import ru.veselov.clientsservice.notification.NotificationClient;
+import ru.veselov.clientsservice.notification.NotificationRequest;
 import ru.veselov.customerservice.dto.CustomerRegistrationRequest;
 import ru.veselov.customerservice.entity.CustomerEntity;
 import ru.veselov.customerservice.repository.CustomerRepository;
@@ -18,9 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    private final RestTemplate restTemplate;
-
     private final FraudClient fraudClient;
+
+    private final NotificationClient notificationClient;
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -38,6 +39,10 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalStateException("Customer is fraudster");
         }
         log.info("Customer is no a fraudster");
-        //TODO notification
+        notificationClient.send(new NotificationRequest(
+                customerEntity.getId(),
+                customerEntity.getEmail(),
+                "Hello"
+        ));
     }
 }
