@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -26,8 +26,8 @@ public class NotificationEntity {
     @Column(name = "notification_id", columnDefinition = "uuid", updatable = false)
     private UUID notificationId;
 
-    @Column(name = "customer_id")
-    private UUID customerId;
+    @Column(name = "to_customer_id")
+    private UUID toCustomerId;
 
     @Column(name = "to_customer_email")
     private String toCustomerEmail;
@@ -39,6 +39,6 @@ public class NotificationEntity {
     private String message;
 
     @Column(name = "sent_At")
-    private LocalDate sentAt;
+    private LocalDateTime sentAt;
 
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.veselov.clientsservice.dto.FraudCheckResponse;
+import ru.veselov.clientsservice.fraud.FraudCheckResponse;
 import ru.veselov.fraudservice.service.FraudCheckService;
 
 import java.util.UUID;

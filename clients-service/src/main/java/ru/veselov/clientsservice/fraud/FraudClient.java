@@ -1,4 +1,4 @@
-package ru.veselov.clientsservice.client;
+package ru.veselov.clientsservice.fraud;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
