@@ -3,7 +3,6 @@ package ru.veselov.clientsservice.fraud;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import ru.veselov.clientsservice.dto.FraudCheckResponse;
 
 import java.util.UUID;
 

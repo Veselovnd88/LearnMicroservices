@@ -44,5 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
                 customerEntity.getEmail(),
                 "Hello"
         ));
+        log.info("Notification sent for [{}]", customerEntity.getEmail());
     }
 }
