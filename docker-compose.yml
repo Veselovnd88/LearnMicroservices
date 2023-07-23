@@ -26,6 +26,20 @@ services:
     volumes:
       - /var/docker-volumes/pg-ms-learn-fraud:/var/lib/postgresql/data/
 
+  postgres-notification:
+    container_name: postgres-notification
+    image: "postgres:15.2"
+    restart: unless-stopped
+    env_file:
+      - database-notification.env
+    ports:
+      - "5439:5432"
+    networks:
+      - postgres
+    volumes:
+      - /var/docker-volumes/pg-ms-learn-notificatioin:/var/lib/postgresql/data/
+
+
 networks:
   postgres:
     driver: bridge

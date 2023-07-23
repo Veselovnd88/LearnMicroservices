@@ -1,0 +1,5 @@
+rootProject.name = 'notification-service'
+
+include ':clients-service'
+
+project(':clients-service').projectDir = new File(settingsDir,"../clients-service")
