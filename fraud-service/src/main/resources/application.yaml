@@ -22,7 +22,10 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
-
+management:
+  tracing:
+    sampling:
+      probability: 1.0
 eureka:
   client:
     service-url:
