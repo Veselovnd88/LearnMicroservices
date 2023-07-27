@@ -21,6 +21,11 @@ spring:
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
+  rabbitmq:
+    addresses: localhost:5672
+    cache:
+      connection:
+        mode: channel
 
 eureka:
   client:
@@ -33,3 +38,11 @@ management:
   tracing:
     sampling:
       probability: 1.0
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queues:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key
