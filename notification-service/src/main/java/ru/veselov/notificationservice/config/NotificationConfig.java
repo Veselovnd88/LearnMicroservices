@@ -40,5 +40,4 @@ public class NotificationConfig {
                 .with(internalNotificationRoutingKey);
     }
 
-
 }
