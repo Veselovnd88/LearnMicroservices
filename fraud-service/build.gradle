@@ -47,7 +47,7 @@ dependencies {
 	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 
 	compileOnly 'org.projectlombok:lombok'
-	compileOnly project(':clients-service')
+	implementation project(':clients-service')
 	runtimeOnly 'org.postgresql:postgresql'
 
 	annotationProcessor 'org.projectlombok:lombok'

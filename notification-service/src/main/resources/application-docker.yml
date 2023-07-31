@@ -22,7 +22,10 @@ spring:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
   rabbitmq:
-    addresses: localhost:5672
+    addresses: rabbitmq:5672
+  cloud:
+    config:
+      enabled: false
 
 eureka:
   client:
