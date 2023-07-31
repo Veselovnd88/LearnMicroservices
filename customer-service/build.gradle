@@ -15,21 +15,10 @@ java {
 jib {
     from {
         image = 'eclipse-temurin:17.0.8_7-jre'
-        platforms {
-            platform {
-                architecture ='amd64'
-                os = 'linux'
-            }
-            platform {
-                architecture = 'arm64'
-                os= 'linux'
-            }
-        }
     }
     to {
         image= "veselovnikolay/$project.name:$version"
     }
-
 }
 
 configurations {
@@ -61,8 +50,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
 
-    compileOnly project(':clients-service')
-    compileOnly project(':amqp')
+    implementation project(':clients-service')
+    implementation project(':amqp')
 
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

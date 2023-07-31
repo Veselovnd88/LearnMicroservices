@@ -1,0 +1,46 @@
+server:
+  port: 7071
+
+spring:
+  application:
+    name: customer
+  datasource:
+    url: jdbc:postgresql://postgres-customer:5437/CustomerDB
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  cloud:
+    config:
+      enabled: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: false
+        hbm2ddl:
+          auto: validate
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
+  rabbitmq:
+    addresses: localhost:5672
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://eureka-server:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
+
+logging:
+  pattern:
+    level: "%5p[${spring.application.name}: %X{traceId:-}, %X{spainId:-}]"

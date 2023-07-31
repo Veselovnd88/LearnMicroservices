@@ -6,6 +6,10 @@ services:
     restart: unless-stopped
     env_file:
       - database-customer.env
+    expose:
+      - "5437"
+    command:
+      - "-p 5437"
     ports:
       - "5437:5432"
     networks:
@@ -19,6 +23,10 @@ services:
     restart: unless-stopped
     env_file:
       - database-fraud.env
+    expose:
+      - "5438"
+    command:
+      - "-p 5438"
     ports:
       - "5438:5432"
     networks:
@@ -32,6 +40,10 @@ services:
     restart: unless-stopped
     env_file:
       - database-notification.env
+    expose:
+      - "5439"
+    command:
+      - "-p 5439"
     ports:
       - "5439:5432"
     networks:
@@ -44,6 +56,9 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+    networks:
+      - spring
+
   rabbitmq:
     image: rabbitmq:3.12.2-management
     container_name: rabbitmq
@@ -51,6 +66,81 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  eureka-server:
+    image: veselovnikolay/eureka-server:1.0-SNAPSHOT
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+    networks:
+      - spring
+      - postgres
+
+  gateway:
+    image: veselovnikolay/gateway:1.0-SNAPSHOT
+    container_name: gateway
+    ports:
+      - "8083:8083"
+    networks:
+      - spring
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - eureka-server
+
+  customer-service:
+    image: veselovnikolay/customer-service:1.0-SNAPSHOT
+    container_name: customer-service
+    ports:
+      - "7071:7071"
+    networks:
+      - spring
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres-customer
+      - rabbitmq
+
+  fraud-service:
+    image: veselovnikolay/fraud-service:1.0-SNAPSHOT
+    container_name: fraud-service
+    ports:
+      - "7076:7076"
+    networks:
+      - spring
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres-fraud
+
+  notification-service:
+    image: veselovnikolay/notification-service:1.0-SNAPSHOT
+    container_name: notification-service
+    ports:
+      - "7075:7075"
+    networks:
+      - spring
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres-notification
+      - rabbitmq
+
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge
