@@ -107,6 +107,7 @@ services:
     depends_on:
       - zipkin
       - eureka-server
+      - gateway
       - postgres-customer
       - rabbitmq
 
