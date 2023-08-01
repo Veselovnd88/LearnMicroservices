@@ -1,5 +1,8 @@
 package ru.veselov.customerservice.service.impl;
 
+import brave.Tracing;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.tracing.annotation.NewSpan;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     @Override
+    @NewSpan("register")
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
         CustomerEntity customerEntity = CustomerEntity.builder()
                 .lastName(customerRegistrationRequest.lastName())

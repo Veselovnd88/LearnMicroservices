@@ -24,6 +24,7 @@ spring:
   rabbitmq:
     addresses: rabbitmq:5672
 
+
 management:
   zipkin:
     tracing:
