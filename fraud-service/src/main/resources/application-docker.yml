@@ -1,9 +1,12 @@
 server:
-  port: 7078
+  port: 7076
 
 spring:
   application:
     name: fraud
+  cloud:
+    config:
+      enabled: false
 
   datasource:
     url: jdbc:postgresql://postgres-fraud:5438/FraudDB
@@ -34,6 +37,6 @@ management:
 eureka:
   client:
     service-url:
-      default-zone: http://eureka-server:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka
     fetch-registry: true
     register-with-eureka: true
