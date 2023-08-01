@@ -11,7 +11,7 @@ services:
     command:
       - "-p 5437"
     ports:
-      - "5437:5432"
+      - "5437:5437"
     networks:
       - postgres
     volumes:
@@ -28,7 +28,7 @@ services:
     command:
       - "-p 5438"
     ports:
-      - "5438:5432"
+      - "5438:5438"
     networks:
       - postgres
     volumes:
@@ -45,7 +45,7 @@ services:
     command:
       - "-p 5439"
     ports:
-      - "5439:5432"
+      - "5439:5439"
     networks:
       - postgres
     volumes:

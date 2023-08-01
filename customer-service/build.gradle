@@ -47,9 +47,9 @@ dependencies {
     implementation 'io.github.openfeign:feign-micrometer:12.4'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     // https://mvnrepository.com/artifact/io.zipkin.brave/brave-instrumentation-messaging
-    implementation 'io.zipkin.brave:brave-instrumentation-messaging:5.16.0'
+//    implementation 'io.zipkin.brave:brave-instrumentation-messaging:5.16.0'
     // https://mvnrepository.com/artifact/io.zipkin.brave/brave-instrumentation-spring-rabbit
-    implementation 'io.zipkin.brave:brave-instrumentation-spring-rabbit:5.16.0'
+  //  implementation 'io.zipkin.brave:brave-instrumentation-spring-rabbit:5.16.0'
 
 
 
