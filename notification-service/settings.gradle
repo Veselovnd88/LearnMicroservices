@@ -1,5 +1,7 @@
 rootProject.name = 'notification-service'
 
 include ':clients-service'
+include ':amqp'
 
-project(':clients-service').projectDir = new File(settingsDir,"../clients-service")
+project(':clients-service').projectDir = new File(settingsDir, "../clients-service")
+project(':amqp').projectDir = new File(settingsDir, "../amqp")

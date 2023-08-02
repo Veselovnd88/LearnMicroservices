@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
+    id 'com.google.cloud.tools.jib' version '3.3.2'
 }
 
 group = 'ru.veselov'
@@ -9,6 +10,15 @@ version = '1.0-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+}
+
+jib {
+    from {
+        image = 'eclipse-temurin:17.0.8_7-jre'
+    }
+    to {
+        image= "veselovnikolay/$project.name:$version"
+    }
 }
 
 configurations {
@@ -35,11 +45,20 @@ dependencies {
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
     implementation 'io.github.openfeign:feign-micrometer:12.4'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    // https://mvnrepository.com/artifact/io.zipkin.brave/brave-instrumentation-messaging
+    implementation 'io.zipkin.brave:brave-instrumentation-messaging:5.16.0'
+    // https://mvnrepository.com/artifact/io.zipkin.brave/brave-instrumentation-spring-rabbit
+    implementation 'io.zipkin.brave:brave-instrumentation-spring-rabbit:5.16.0'
+
+
+
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
 
-    compileOnly project(':clients-service')
+    implementation project(':clients-service')
+    implementation project(':amqp')
 
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

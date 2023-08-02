@@ -1,0 +1,51 @@
+server:
+  port: 7075
+
+spring:
+  application:
+    name: notification
+  datasource:
+    url: jdbc:postgresql://postgres-notification:5439/NotificationDB
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: false
+        hbm2ddl:
+          auto: validate
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
+  rabbitmq:
+    addresses: rabbitmq:5672
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queues:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key
