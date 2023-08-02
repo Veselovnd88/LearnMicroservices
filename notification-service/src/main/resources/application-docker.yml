@@ -5,7 +5,7 @@ spring:
   application:
     name: notification
   datasource:
-    url: jdbc:postgresql://postgres-notification:5439/NotificationDB
+    url: jdbc:postgresql://postgres-notification:5437/msDB
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver
