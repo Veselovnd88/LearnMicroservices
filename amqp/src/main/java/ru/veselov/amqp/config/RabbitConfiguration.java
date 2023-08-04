@@ -20,6 +20,7 @@ public class RabbitConfiguration {
     public AmqpTemplate amqpTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jacksonConverter());
+        rabbitTemplate.setObservationEnabled(true);
         return rabbitTemplate;
     }
 

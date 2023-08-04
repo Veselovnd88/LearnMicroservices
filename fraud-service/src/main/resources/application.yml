@@ -6,7 +6,7 @@ spring:
     name: fraud
 
   datasource:
-    url: jdbc:postgresql://localhost:5438/FraudDB
+    url: jdbc:postgresql://localhost:5437/msDB
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver

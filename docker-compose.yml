@@ -1,55 +1,21 @@
 version: "3.8"
 services:
-  postgres-customer:
-    container_name: postgres-customer
+  postgres:
+    container_name: postgres
     image: "postgres:15.2"
     restart: unless-stopped
     env_file:
-      - database-customer.env
+      - database.env
     expose:
       - "5437"
     command:
       - "-p 5437"
     ports:
-      - "5437:5432"
+      - "5437:5437"
     networks:
       - postgres
     volumes:
-      - /var/docker-volumes/pg-ms-learn-customer:/var/lib/postgresql/data/
-
-  postgres-fraud:
-    container_name: postgres-fraud
-    image: "postgres:15.2"
-    restart: unless-stopped
-    env_file:
-      - database-fraud.env
-    expose:
-      - "5438"
-    command:
-      - "-p 5438"
-    ports:
-      - "5438:5432"
-    networks:
-      - postgres
-    volumes:
-      - /var/docker-volumes/pg-ms-learn-fraud:/var/lib/postgresql/data/
-
-  postgres-notification:
-    container_name: postgres-notification
-    image: "postgres:15.2"
-    restart: unless-stopped
-    env_file:
-      - database-notification.env
-    expose:
-      - "5439"
-    command:
-      - "-p 5439"
-    ports:
-      - "5439:5432"
-    networks:
-      - postgres
-    volumes:
-      - /var/docker-volumes/pg-ms-learn-notificatioin:/var/lib/postgresql/data/
+      - /var/docker-volumes/pg-ms-learn:/var/lib/postgresql/data/
 
   zipkin:
     image: openzipkin/zipkin
@@ -108,7 +74,7 @@ services:
       - zipkin
       - eureka-server
       - gateway
-      - postgres-customer
+      - postgres
       - rabbitmq
 
   fraud-service:
@@ -124,7 +90,7 @@ services:
     depends_on:
       - zipkin
       - eureka-server
-      - postgres-fraud
+      - postgres
 
   notification-service:
     image: veselovnikolay/notification-service:1.0-SNAPSHOT
@@ -139,7 +105,7 @@ services:
     depends_on:
       - zipkin
       - eureka-server
-      - postgres-notification
+      - postgres
       - rabbitmq
 
 networks:
